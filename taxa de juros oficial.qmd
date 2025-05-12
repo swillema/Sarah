@@ -1,0 +1,144 @@
+---
+title: "Taxa de Juros nas Principais Economias"
+author: "Sarah Willemann"
+date: "2025-05-11"
+format:
+  revealjs:
+    theme: white
+    css: estilo-academico.css
+lang: pt-BR
+---
+
+## Introdução
+
+Esta apresentação aborda as taxas de juros ao redor do mundo, com foco em diferentes países e suas políticas monetárias ao longo do tempo.
+
+------------------------------------------------------------------------
+
+## Dados em Painel: Taxa de Juros Real (2000–2024)
+
+Aqui vamos apresentar uma comparação da taxa de juros real entre o Brasil e as 10 maiores economias do mundo.
+
+```{r}
+library(WDI)
+library(ggplot2)
+
+paises <- c("US", "CN", "JP", "DE", "GB", "IN", "FR", "IT", "BR", "CA")
+
+dados_juros <- WDI(country = paises, indicator = "FR.INR.LEND", start = 1980, end = 2024)
+colnames(dados_juros)[colnames(dados_juros) == "FR.INR.LEND"] <- "taxa_juros"
+dados_juros <- subset(na.omit(dados_juros), year >= 2000)
+
+ggplot(dados_juros, aes(x = year, y = taxa_juros, color = country, group = country)) +
+  geom_line(size = 1) +
+  scale_color_manual(values = c(
+    "Brazil" = "red",
+    "United States" = "gray30",
+    "China" = "blue",
+    "Japan" = "green",
+    "Germany" = "purple",
+    "United Kingdom" = "orange",
+    "India" = "brown",
+    "France" = "pink",
+    "Italy" = "cyan",
+    "Canada" = "gold"
+  )) +
+  labs(
+    title = "Taxa de Juros Real (2000–2024)",
+    subtitle = "Comparação entre o Brasil e as 10 maiores economias do mundo",
+    x = "Ano",
+    y = "Taxa de Juros (%)",
+    color = "País"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "right")
+```
+
+------------------------------------------------------------------------
+
+## **CORTE TRANSVERSAL**
+
+```{r}
+library(dplyr)
+
+dados_juros_nominais <- data.frame(
+  country = c("United States", "China", "Japan", "Germany", "United Kingdom", "India", 
+              "France", "Italy", "Brazil", "Canada"),
+  taxa_juros_nominal = c(0.75, 3.5, 0.1, 1.5, 2.0, 6.5, 1.0, 1.8, 13.5, 2.25),
+  inflacao = c(8.0, 2.1, 0.8, 5.0, 7.5, 6.0, 5.8, 7.5, 5.8, 6.7)
+)
+
+dados_juros_nominais <- dados_juros_nominais %>%
+  mutate(taxa_juros_real = ((1 + taxa_juros_nominal / 100) / (1 + inflacao / 100)) - 1)
+
+ggplot(dados_juros_nominais, aes(x = taxa_juros_real * 100, y = country)) +
+  geom_bar(aes(fill = country == "Brazil"), stat = "identity", width = 0.6) +
+  scale_fill_manual(values = c("FALSE" = "steelblue", "TRUE" = "red"),
+                    labels = c("FALSE" = "Outros países", "TRUE" = "Brasil")) +
+  labs(title = "Taxa de Juros Real em 2022 (Estimativa)",
+       subtitle = "Entre as 10 maiores economias do mundo", 
+       x = "Taxa de Juros Real (%)", y = "",
+       fill = "País") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+
+```
+
+------------------------------------------------------------------------
+
+## **SÉRIE TEMPORAL**
+
+```{r}
+# Carregar pacotes
+library(WDI)
+library(ggplot2)
+library(dplyr)  # <- necessário para %>%
+
+# Gráfico de série temporal
+ggplot(dados_juros, aes(x = year, y = taxa_juros)) +
+  geom_line(color = "steelblue", size = 1) +
+  facet_wrap(~ country, scales = "free_y") +
+  labs(title = "Evolução da Taxa de Juros Real por País (2000–2024)",
+       x = "Ano", y = "Taxa de Juros (%)") +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+## Variável Utilizada
+
+**Nome completo:** Interest rate (%) – Lending interest rate\
+**Fonte:** World Bank – World Development Indicators (WDI)\
+**Descrição:** Taxa de juros de empréstimos praticada pelos bancos comerciais para seus clientes mais confiáveis.\
+**Expressa em:** percentual ao ano (%)
+
+------------------------------------------------------------------------
+
+## Interpretação: Painel e Corte Transversal
+
+**Dados em Painel:** - Organizados em duas dimensões: tempo e unidade (país). - Permite analisar trajetórias ao longo do tempo.
+
+**Corte Transversal:** - Mostra a taxa de juros real estimada para 2022. - O Brasil apresenta a taxa mais alta entre as maiores economias.
+
+**Causas prováveis:** 1. Inflação elevada e volátil 2. Prêmio de risco 3. Política monetária conservadora 4. Baixa produtividade
+
+------------------------------------------------------------------------
+
+## Discrepâncias entre Países
+
+1.  Condições macroeconômicas distintas
+2.  Credibilidade das instituições
+3.  Capacidade de emitir moeda forte
+4.  Fatores demográficos e de crescimento
+
+------------------------------------------------------------------------
+
+## Conclusão
+
+-   O Brasil tem mantido taxas de juros reais elevadas em relação ao resto do mundo.
+-   Outros países reduziram juros pós-2008 e 2020, o Brasil seguiu trajetória distinta.
+-   A política monetária brasileira responde a fatores locais: inflação, câmbio e expectativas.
+-   Limitações: ausência de dados para alguns países em certos anos pode impactar a comparação.
+
+------------------------------------------------------------------------
