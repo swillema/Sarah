@@ -1,0 +1,89 @@
+---
+title: "Renda Nacional Disponível Bruta das Famílias"
+author: "Sarah Willemann"
+date: "2025-06-02"
+format:
+  revealjs:
+    theme: white
+    transition: slide
+    css: estilo-academico.css
+lang: pt-BR
+---
+
+## Renda Nacional Disponível Bruta das Famílias - 29029
+
+A **Renda Nacional Disponível Bruta das Famílias** reflete o total de rendimentos que as famílias brasileiras recebem, ajustado para o valor atual (em termos correntes). Esse indicador considera a soma de todas as fontes de renda das famílias ao longo de um período de 12 meses.
+
+---
+
+## Importância
+
+O monitoramento dessa renda é fundamental, pois está diretamente relacionado à capacidade das famílias de consumir e poupar, o que afeta o crescimento econômico e as políticas públicas.
+
+---
+
+## Gráfico e Análise
+
+O gráfico animado abaixo mostra a evolução da Renda Nacional Disponível Bruta das Famílias desde 2003:
+
+::: {.center}
+![Gráfico Animado](renda_nacional_disponivel_milhoes_rapida.gif){width=80%}
+:::
+
+---
+
+## Eventos Econômicos Importantes
+
+---
+
+## 2008 – Crise Financeira Global
+
+A crise global aparece no gráfico como uma **queda sutil e de curta duração** na renda nacional disponível.
+
+- Sistema bancário brasileiro resiliente.
+- Políticas anticíclicas: crédito, consumo e gasto público.
+- Forte demanda externa por commodities (China).
+
+O gráfico mostra uma **recuperação quase imediata**, refletindo confiança e resposta rápida da economia.
+
+---
+
+## 2015–2016 – Crise Econômica e Política no Brasil
+
+Este período mostra uma **queda mais profunda e prolongada** da renda:
+
+- **Recessão técnica**: dois anos de PIB negativo.
+- Alta inflação, desemprego e perda de poder de compra.
+- Crise política e instabilidade institucional (impeachment).
+
+O gráfico revela **deterioração estrutural**, com recuperação lenta.
+
+---
+
+## 2020 – Pandemia de COVID-19
+
+A pandemia marca uma **queda abrupta**, mas seguida de **recuperação relativamente rápida**:
+
+- Queda na renda informal, desemprego e retração do consumo.
+- Auxílio emergencial atuou como amortecedor.
+- Políticas de crédito e reabertura econômica impulsionaram a retomada.
+
+O gráfico mostra recuperação ainda em curso no pós-pandemia.
+
+
+---
+
+## Conclusão
+
+A renda nacional das famílias é um importante termômetro da economia brasileira. Seu acompanhamento permite diagnósticos e decisões mais acertadas por parte de gestores públicos, economistas e pesquisadores.
+
+---
+
+## Fontes
+
+- Banco Central do Brasil – SGS – Série 29029  
+- Pacote R: `GetBCBData`  
+- IBGE – Indicadores econômicos e sociais  
+- Relatórios de conjuntura econômica
+
+
