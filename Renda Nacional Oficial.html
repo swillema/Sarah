@@ -152,15 +152,8 @@ Sarah Willemann
 <section id="gráfico-e-análise" class="slide level2">
 <h2>Gráfico e Análise</h2>
 <p>O gráfico animado abaixo mostra a evolução da Renda Nacional Disponível Bruta das Famílias desde 2003:</p>
-<div class="center">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="renda_nacional_disponivel_milhoes_rapida.gif" style="width:80.0%"></p>
-<figcaption>Gráfico Animado</figcaption>
-</figure>
-</div>
-</div>
-</section>
+
+<img data-src="Renda-Nacional-Oficial_files/figure-revealjs/unnamed-chunk-1-1.gif" class="r-stretch"></section>
 <section id="eventos-econômicos-importantes" class="slide level2">
 <h2>Eventos Econômicos Importantes</h2>
 </section>
@@ -426,6 +419,82 @@ Sarah Willemann
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
